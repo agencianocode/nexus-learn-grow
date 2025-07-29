@@ -14,7 +14,275 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      communities: {
+        Row: {
+          courses_count: number | null
+          cover_url: string | null
+          created_at: string | null
+          creator_id: string
+          description: string | null
+          features: string[] | null
+          id: string
+          is_public: boolean | null
+          logo_url: string | null
+          name: string
+          primary_color: string | null
+          slug: string
+          subscription_interval:
+            | Database["public"]["Enums"]["subscription_interval"]
+            | null
+          subscription_price: number | null
+          theme: Database["public"]["Enums"]["community_theme"] | null
+          total_members: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          courses_count?: number | null
+          cover_url?: string | null
+          created_at?: string | null
+          creator_id: string
+          description?: string | null
+          features?: string[] | null
+          id?: string
+          is_public?: boolean | null
+          logo_url?: string | null
+          name: string
+          primary_color?: string | null
+          slug: string
+          subscription_interval?:
+            | Database["public"]["Enums"]["subscription_interval"]
+            | null
+          subscription_price?: number | null
+          theme?: Database["public"]["Enums"]["community_theme"] | null
+          total_members?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          courses_count?: number | null
+          cover_url?: string | null
+          created_at?: string | null
+          creator_id?: string
+          description?: string | null
+          features?: string[] | null
+          id?: string
+          is_public?: boolean | null
+          logo_url?: string | null
+          name?: string
+          primary_color?: string | null
+          slug?: string
+          subscription_interval?:
+            | Database["public"]["Enums"]["subscription_interval"]
+            | null
+          subscription_price?: number | null
+          theme?: Database["public"]["Enums"]["community_theme"] | null
+          total_members?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communities_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_members: {
+        Row: {
+          community_id: string
+          id: string
+          is_moderator: boolean | null
+          joined_at: string | null
+          user_id: string
+        }
+        Insert: {
+          community_id: string
+          id?: string
+          is_moderator?: boolean | null
+          joined_at?: string | null
+          user_id: string
+        }
+        Update: {
+          community_id?: string
+          id?: string
+          is_moderator?: boolean | null
+          joined_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_members_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_members_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      courses: {
+        Row: {
+          community_id: string
+          created_at: string | null
+          creator_id: string
+          description: string | null
+          duration_minutes: number | null
+          enrollment_count: number | null
+          id: string
+          is_published: boolean | null
+          lesson_count: number | null
+          price: number | null
+          thumbnail_url: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          community_id: string
+          created_at?: string | null
+          creator_id: string
+          description?: string | null
+          duration_minutes?: number | null
+          enrollment_count?: number | null
+          id?: string
+          is_published?: boolean | null
+          lesson_count?: number | null
+          price?: number | null
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          community_id?: string
+          created_at?: string | null
+          creator_id?: string
+          description?: string | null
+          duration_minutes?: number | null
+          enrollment_count?: number | null
+          id?: string
+          is_published?: boolean | null
+          lesson_count?: number | null
+          price?: number | null
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "courses_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "courses_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      posts: {
+        Row: {
+          author_id: string
+          comment_count: number | null
+          community_id: string
+          content: string | null
+          created_at: string | null
+          id: string
+          is_pinned: boolean | null
+          like_count: number | null
+          media_url: string | null
+          title: string | null
+          type: Database["public"]["Enums"]["post_type"] | null
+          updated_at: string | null
+        }
+        Insert: {
+          author_id: string
+          comment_count?: number | null
+          community_id: string
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          is_pinned?: boolean | null
+          like_count?: number | null
+          media_url?: string | null
+          title?: string | null
+          type?: Database["public"]["Enums"]["post_type"] | null
+          updated_at?: string | null
+        }
+        Update: {
+          author_id?: string
+          comment_count?: number | null
+          community_id?: string
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          is_pinned?: boolean | null
+          like_count?: number | null
+          media_url?: string | null
+          title?: string | null
+          type?: Database["public"]["Enums"]["post_type"] | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string | null
+          email: string
+          full_name: string | null
+          id: string
+          role: Database["public"]["Enums"]["user_role"] | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          email: string
+          full_name?: string | null
+          id: string
+          role?: Database["public"]["Enums"]["user_role"] | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          email?: string
+          full_name?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"] | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +291,10 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      community_theme: "light" | "dark" | "custom"
+      post_type: "text" | "video" | "image" | "poll" | "quiz"
+      subscription_interval: "monthly" | "yearly"
+      user_role: "creator" | "member" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +421,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      community_theme: ["light", "dark", "custom"],
+      post_type: ["text", "video", "image", "poll", "quiz"],
+      subscription_interval: ["monthly", "yearly"],
+      user_role: ["creator", "member", "admin"],
+    },
   },
 } as const
