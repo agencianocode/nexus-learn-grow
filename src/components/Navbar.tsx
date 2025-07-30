@@ -22,6 +22,9 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
+            <Link to="/courses" className="text-muted-foreground hover:text-foreground transition-smooth">
+              Cursos
+            </Link>
             <Link to="/features" className="text-muted-foreground hover:text-foreground transition-smooth">
               Features
             </Link>
@@ -82,6 +85,13 @@ export function Navbar() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 space-y-4 border-t border-border">
+            <Link
+              to="/courses"
+              className="block text-muted-foreground hover:text-foreground transition-smooth"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Cursos
+            </Link>
             <Link
               to="/features"
               className="block text-muted-foreground hover:text-foreground transition-smooth"
