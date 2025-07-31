@@ -1,0 +1,134 @@
+/* Estilos personalizados para el editor de markdown */
+.w-md-editor {
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  background: hsl(var(--background));
+}
+
+.w-md-editor-toolbar {
+  border-bottom: 1px solid hsl(var(--border));
+  background: hsl(var(--muted));
+}
+
+.w-md-editor-toolbar-divider {
+  background: hsl(var(--border));
+}
+
+.w-md-editor-toolbar li button {
+  color: hsl(var(--muted-foreground));
+}
+
+.w-md-editor-toolbar li button:hover {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.w-md-editor-toolbar li.active button {
+  background: hsl(var(--brand));
+  color: hsl(var(--brand-foreground));
+}
+
+.w-md-editor-input {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.w-md-editor-input::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+.w-md-editor-preview {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.w-md-editor-preview h1,
+.w-md-editor-preview h2,
+.w-md-editor-preview h3,
+.w-md-editor-preview h4,
+.w-md-editor-preview h5,
+.w-md-editor-preview h6 {
+  color: hsl(var(--foreground));
+}
+
+.w-md-editor-preview code {
+  background: hsl(var(--muted));
+  color: hsl(var(--foreground));
+}
+
+.w-md-editor-preview pre {
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+}
+
+.w-md-editor-preview blockquote {
+  border-left: 4px solid hsl(var(--brand));
+  background: hsl(var(--muted));
+}
+
+.w-md-editor-preview table {
+  border: 1px solid hsl(var(--border));
+}
+
+.w-md-editor-preview th,
+.w-md-editor-preview td {
+  border: 1px solid hsl(var(--border));
+}
+
+/* Animaciones para drag & drop */
+.dragging {
+  opacity: 0.5;
+  transform: rotate(5deg);
+}
+
+.drag-over {
+  border-color: hsl(var(--brand));
+  background: hsl(var(--brand-muted));
+}
+
+/* Estilos para el estado vacío */
+.empty-state {
+  border: 2px dashed hsl(var(--border));
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  color: hsl(var(--muted-foreground));
+}
+
+.empty-state:hover {
+  border-color: hsl(var(--brand));
+  background: hsl(var(--brand-muted));
+}
+
+/* Estilos para badges de estadísticas */
+.stats-badge {
+  background: hsl(var(--brand-muted));
+  color: hsl(var(--brand));
+  border: 1px solid hsl(var(--brand));
+}
+
+/* Estilos para el editor expandido */
+.module-expanded {
+  border-left: 4px solid hsl(var(--brand));
+  box-shadow: 0 4px 6px -1px hsl(var(--brand) / 0.1);
+}
+
+/* Estilos para lecciones */
+.lesson-card {
+  transition: all 0.2s ease-in-out;
+}
+
+.lesson-card:hover {
+  box-shadow: 0 2px 4px -1px hsl(var(--brand) / 0.1);
+  border-color: hsl(var(--brand));
+}
+
+/* Estilos para botones de acción */
+.action-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.action-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px hsl(var(--brand) / 0.2);
+} 

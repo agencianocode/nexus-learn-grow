@@ -64,13 +64,13 @@ export function Features() {
     <section className="py-20 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary mb-6">
+          <div className="inline-flex items-center px-4 py-2 bg-brand-muted rounded-full text-sm font-medium text-brand mb-6">
             <Zap className="w-4 h-4 mr-2" />
             Características Avanzadas
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Todo lo que necesitas para
-            <span className="text-gradient block">hacer crecer tu comunidad</span>
+            <span className="text-brand-gradient block">hacer crecer tu comunidad</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Herramientas profesionales diseñadas específicamente para creadores que quieren 
@@ -82,11 +82,11 @@ export function Features() {
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="p-6 hover:shadow-elegant transition-smooth border-0 card-gradient"
+              className="p-6 hover:shadow-brand transition-smooth border-0 card-gradient"
             >
               <CardContent className="p-0">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <feature.icon className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 bg-brand-muted rounded-lg flex items-center justify-center mb-4">
+                  <feature.icon className="w-6 h-6 text-brand" />
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">{feature.description}</p>

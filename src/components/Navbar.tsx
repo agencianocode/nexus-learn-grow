@@ -14,10 +14,10 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">E</span>
+            <div className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center">
+              <span className="text-brand-foreground font-bold text-lg">E</span>
             </div>
-            <span className="text-xl font-bold text-gradient">EduCommunity</span>
+            <span className="text-xl font-bold text-brand-gradient">EduCommunity</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -41,30 +41,31 @@ export function Navbar() {
             {user ? (
               <div className="flex items-center space-x-4">
                 <Link to="/dashboard">
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className="hover:bg-brand-muted hover:text-brand transition-smooth">
                     <User className="w-4 h-4 mr-2" />
                     Dashboard
                   </Button>
                 </Link>
-                <Button
-                  variant="ghost"
-                  size="sm"
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
                   onClick={signOut}
-                  className="text-muted-foreground"
+                  className="hover:bg-destructive/10 hover:text-destructive transition-smooth"
                 >
-                  <LogOut className="w-4 h-4" />
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Salir
                 </Button>
               </div>
             ) : (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-4">
                 <Link to="/auth">
-                  <Button variant="ghost" size="sm">
-                    Sign In
+                  <Button variant="outline" size="sm" className="hover:bg-brand-muted hover:text-brand transition-smooth">
+                    Iniciar Sesión
                   </Button>
                 </Link>
                 <Link to="/auth">
-                  <Button size="sm">
-                    Get Started
+                  <Button size="sm" className="btn-brand">
+                    Registrarse
                   </Button>
                 </Link>
               </div>
@@ -72,82 +73,87 @@ export function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <Menu className="w-5 h-5" />
-          </Button>
+          <div className="md:hidden">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="hover:bg-brand-muted hover:text-brand transition-smooth"
+            >
+              <Menu className="w-5 h-5" />
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 space-y-4 border-t border-border">
-            <Link
-              to="/courses"
-              className="block text-muted-foreground hover:text-foreground transition-smooth"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Cursos
-            </Link>
-            <Link
-              to="/features"
-              className="block text-muted-foreground hover:text-foreground transition-smooth"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Features
-            </Link>
-            <Link
-              to="/pricing"
-              className="block text-muted-foreground hover:text-foreground transition-smooth"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Pricing
-            </Link>
-            <Link
-              to="/about"
-              className="block text-muted-foreground hover:text-foreground transition-smooth"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </Link>
-            <div className="pt-4 space-y-2">
-              {user ? (
-                <>
-                  <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="outline" className="w-full">
-                      <User className="w-4 h-4 mr-2" />
-                      Dashboard
+          <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
+            <div className="px-4 py-4 space-y-4">
+              <Link 
+                to="/courses" 
+                className="block text-muted-foreground hover:text-foreground transition-smooth"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Cursos
+              </Link>
+              <Link 
+                to="/features" 
+                className="block text-muted-foreground hover:text-foreground transition-smooth"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Features
+              </Link>
+              <Link 
+                to="/pricing" 
+                className="block text-muted-foreground hover:text-foreground transition-smooth"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Pricing
+              </Link>
+              <Link 
+                to="/about" 
+                className="block text-muted-foreground hover:text-foreground transition-smooth"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
+              
+              <div className="pt-4 border-t border-border">
+                {user ? (
+                  <div className="space-y-3">
+                    <Link to="/dashboard">
+                      <Button variant="outline" className="w-full justify-start hover:bg-brand-muted hover:text-brand transition-smooth">
+                        <User className="w-4 h-4 mr-2" />
+                        Dashboard
+                      </Button>
+                    </Link>
+                    <Button 
+                      variant="ghost" 
+                      className="w-full justify-start hover:bg-destructive/10 hover:text-destructive transition-smooth"
+                      onClick={() => {
+                        signOut();
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Salir
                     </Button>
-                  </Link>
-                  <Button
-                    variant="ghost"
-                    className="w-full"
-                    onClick={() => {
-                      signOut();
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Sign Out
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="ghost" className="w-full">
-                      Sign In
-                    </Button>
-                  </Link>
-                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                    <Button className="w-full">
-                      Get Started
-                    </Button>
-                  </Link>
-                </>
-              )}
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <Link to="/auth">
+                      <Button variant="outline" className="w-full justify-start hover:bg-brand-muted hover:text-brand transition-smooth">
+                        Iniciar Sesión
+                      </Button>
+                    </Link>
+                    <Link to="/auth">
+                      <Button className="w-full justify-start btn-brand">
+                        Registrarse
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}

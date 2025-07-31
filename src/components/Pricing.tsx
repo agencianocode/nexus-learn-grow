@@ -64,13 +64,13 @@ export function Pricing() {
     <section className="py-20 px-4 bg-muted/30">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary mb-6">
+          <div className="inline-flex items-center px-4 py-2 bg-brand-muted rounded-full text-sm font-medium text-brand mb-6">
             <Crown className="w-4 h-4 mr-2" />
             Planes y Precios
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Elige el plan perfecto
-            <span className="text-gradient block">para tu comunidad</span>
+            <span className="text-brand-gradient block">para tu comunidad</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Comienza gratis y escala conforme crece tu audiencia. 
@@ -84,13 +84,13 @@ export function Pricing() {
               key={index}
               className={`relative p-6 ${
                 plan.popular 
-                  ? 'border-2 border-primary shadow-elegant scale-105' 
+                  ? 'border-2 border-brand shadow-brand scale-105' 
                   : 'border-border'
               }`}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium">
+                  <div className="bg-brand text-brand-foreground px-4 py-2 rounded-full text-sm font-medium">
                     Más Popular
                   </div>
                 </div>
@@ -98,12 +98,12 @@ export function Pricing() {
 
               <CardHeader className="text-center pb-6">
                 <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 ${
-                  plan.popular ? 'bg-primary text-primary-foreground' : 'bg-primary/10 text-primary'
+                  plan.popular ? 'bg-brand text-brand-foreground' : 'bg-brand-muted text-brand'
                 }`}>
                   <plan.icon className="w-8 h-8" />
                 </div>
                 <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-                <div className="text-4xl font-bold text-primary mb-2">
+                <div className="text-4xl font-bold text-brand mb-2">
                   {plan.price}
                   {plan.period && <span className="text-lg text-muted-foreground">{plan.period}</span>}
                 </div>
@@ -114,7 +114,7 @@ export function Pricing() {
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center">
-                      <Check className="w-5 h-5 text-primary mr-3 flex-shrink-0" />
+                      <Check className="w-5 h-5 text-brand mr-3 flex-shrink-0" />
                       <span className="text-sm">{feature}</span>
                     </li>
                   ))}
@@ -124,8 +124,8 @@ export function Pricing() {
                   <Button 
                     className={`w-full ${
                       plan.popular 
-                        ? 'bg-primary hover:bg-primary/90' 
-                        : ''
+                        ? 'btn-brand' 
+                        : 'hover:bg-brand-muted hover:text-brand transition-smooth'
                     }`}
                     variant={plan.popular ? 'default' : 'outline'}
                   >
@@ -141,7 +141,7 @@ export function Pricing() {
           <p className="text-muted-foreground mb-4">
             ¿Necesitas algo diferente? Contáctanos para un plan personalizado.
           </p>
-          <Button variant="ghost">
+          <Button variant="ghost" className="hover:bg-brand-muted hover:text-brand transition-smooth">
             Hablar con Ventas
           </Button>
         </div>

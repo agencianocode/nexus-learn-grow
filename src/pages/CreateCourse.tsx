@@ -8,13 +8,18 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { AdvancedCourseEditor } from '@/components/CourseEditor/AdvancedCourseEditor';
 import { 
   ArrowLeft, 
   Plus, 
   Trash2, 
   GripVertical,
   Save,
-  Eye
+  Eye,
+  BookOpen,
+  Clock,
+  Video,
+  FileText
 } from 'lucide-react';
 
 interface Module {
@@ -55,73 +60,15 @@ export default function CreateCourse() {
     return null;
   }
 
-  const addModule = () => {
-    const newModule: Module = {
-      id: `temp-${Date.now()}`,
-      title: '',
-      description: '',
-      lessons: [],
-      order_index: modules.length
-    };
-    setModules([...modules, newModule]);
-  };
-
-  const updateModule = (moduleId: string, field: string, value: string) => {
-    setModules(modules.map(module => 
-      module.id === moduleId 
-        ? { ...module, [field]: value }
-        : module
-    ));
-  };
-
-  const deleteModule = (moduleId: string) => {
-    setModules(modules.filter(module => module.id !== moduleId));
-  };
-
-  const addLesson = (moduleId: string) => {
-    const newLesson: Lesson = {
-      id: `temp-${Date.now()}`,
-      title: '',
-      content: '',
-      video_url: '',
-      duration_minutes: 0,
-      order_index: 0
-    };
-
-    setModules(modules.map(module => 
-      module.id === moduleId 
-        ? { 
-            ...module, 
-            lessons: [...module.lessons, { ...newLesson, order_index: module.lessons.length }]
-          }
-        : module
-    ));
-  };
-
-  const updateLesson = (moduleId: string, lessonId: string, field: string, value: string | number) => {
-    setModules(modules.map(module => 
-      module.id === moduleId 
-        ? {
-            ...module,
-            lessons: module.lessons.map(lesson =>
-              lesson.id === lessonId 
-                ? { ...lesson, [field]: value }
-                : lesson
-            )
-          }
-        : module
-    ));
-  };
-
-  const deleteLesson = (moduleId: string, lessonId: string) => {
-    setModules(modules.map(module => 
-      module.id === moduleId 
-        ? {
-            ...module,
-            lessons: module.lessons.filter(lesson => lesson.id !== lessonId)
-          }
-        : module
-    ));
+  // Calculate course stats
+  const courseStats = {
+    totalModules: modules.length,
+    totalLessons: modules.reduce((acc, module) => acc + module.lessons.length, 0),
+    totalDuration: modules.reduce((acc, module) => 
+      acc + module.lessons.reduce((lessonAcc, lesson) => lessonAcc + lesson.duration_minutes, 0), 0
+    ),
+    hasVideo: modules.some(module => module.lessons.some(lesson => lesson.video_url)),
+    hasContent: modules.some(module => module.lessons.some(lesson => lesson.content))
   };
 
   const saveCourse = async (publish: boolean = false) => {
@@ -134,15 +81,18 @@ export default function CreateCourse() {
       return;
     }
 
+    if (modules.length === 0) {
+      toast({
+        title: "Error",
+        description: "Debes agregar al menos un módulo al curso",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setSaving(true);
 
     try {
-      // Calculate totals
-      const totalLessons = modules.reduce((acc, module) => acc + module.lessons.length, 0);
-      const totalDuration = modules.reduce((acc, module) => 
-        acc + module.lessons.reduce((lessonAcc, lesson) => lessonAcc + lesson.duration_minutes, 0), 0
-      );
-
       // Create course
       const { data: course, error: courseError } = await supabase
         .from('courses')
@@ -151,9 +101,9 @@ export default function CreateCourse() {
           creator_id: user.id,
           community_id: user.id, // For now, use user id as community id
           is_published: publish,
-          total_modules: modules.length,
-          total_lessons: totalLessons,
-          duration_minutes: totalDuration
+          total_modules: courseStats.totalModules,
+          total_lessons: courseStats.totalLessons,
+          duration_minutes: courseStats.totalDuration
         })
         .select()
         .single();
@@ -218,7 +168,7 @@ export default function CreateCourse() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
       {/* Header */}
       <div className="flex items-center gap-4 mb-8">
         <Button variant="ghost" onClick={() => navigate('/dashboard')}>
@@ -231,7 +181,10 @@ export default function CreateCourse() {
       {/* Course Basic Info */}
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Información Básica</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <BookOpen className="w-5 h-5" />
+            Información Básica del Curso
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
@@ -240,6 +193,7 @@ export default function CreateCourse() {
               placeholder="Ej: Introducción a React y TypeScript"
               value={courseData.title}
               onChange={(e) => setCourseData({...courseData, title: e.target.value})}
+              className="text-lg"
             />
           </div>
 
@@ -290,139 +244,14 @@ export default function CreateCourse() {
         </CardContent>
       </Card>
 
-      {/* Course Structure */}
-      <Card className="mb-8">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Estructura del Curso</CardTitle>
-          <Button onClick={addModule} variant="outline">
-            <Plus className="w-4 h-4 mr-2" />
-            Agregar Módulo
-          </Button>
-        </CardHeader>
-        <CardContent>
-          {modules.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
-              <p>No hay módulos aún. Agrega tu primer módulo para comenzar.</p>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {modules.map((module, moduleIndex) => (
-                <Card key={module.id} className="border-l-4 border-l-primary">
-                  <CardHeader className="pb-4">
-                    <div className="flex items-start gap-4">
-                      <GripVertical className="w-5 h-5 text-muted-foreground mt-1" />
-                      <div className="flex-1 space-y-3">
-                        <Input
-                          placeholder="Título del módulo"
-                          value={module.title}
-                          onChange={(e) => updateModule(module.id, 'title', e.target.value)}
-                        />
-                        <Textarea
-                          placeholder="Descripción del módulo (opcional)"
-                          value={module.description}
-                          onChange={(e) => updateModule(module.id, 'description', e.target.value)}
-                          rows={2}
-                        />
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => deleteModule(module.id)}
-                        className="text-destructive hover:text-destructive"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent>
-                    <div className="flex justify-between items-center mb-4">
-                      <h4 className="font-medium">Lecciones</h4>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => addLesson(module.id)}
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Agregar Lección
-                      </Button>
-                    </div>
-
-                    {module.lessons.length === 0 ? (
-                      <p className="text-sm text-muted-foreground text-center py-4">
-                        No hay lecciones en este módulo
-                      </p>
-                    ) : (
-                      <div className="space-y-3">
-                        {module.lessons.map((lesson) => (
-                          <div key={lesson.id} className="p-4 border border-border rounded-lg">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                              <Input
-                                placeholder="Título de la lección"
-                                value={lesson.title}
-                                onChange={(e) => updateLesson(module.id, lesson.id, 'title', e.target.value)}
-                              />
-                              <div className="flex gap-2">
-                                <Input
-                                  type="number"
-                                  placeholder="Duración (min)"
-                                  value={lesson.duration_minutes}
-                                  onChange={(e) => updateLesson(module.id, lesson.id, 'duration_minutes', Number(e.target.value))}
-                                />
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => deleteLesson(module.id, lesson.id)}
-                                  className="text-destructive hover:text-destructive"
-                                >
-                                  <Trash2 className="w-4 h-4" />
-                                </Button>
-                              </div>
-                            </div>
-                            <Textarea
-                              placeholder="Contenido de la lección..."
-                              value={lesson.content}
-                              onChange={(e) => updateLesson(module.id, lesson.id, 'content', e.target.value)}
-                              rows={3}
-                              className="mb-3"
-                            />
-                            <Input
-                              placeholder="URL del video (opcional)"
-                              value={lesson.video_url}
-                              onChange={(e) => updateLesson(module.id, lesson.id, 'video_url', e.target.value)}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
-      {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-end">
-        <Button
-          variant="outline"
-          onClick={() => saveCourse(false)}
-          disabled={saving}
-          className="flex items-center gap-2"
-        >
-          <Save className="w-4 h-4" />
-          {saving ? 'Guardando...' : 'Guardar Borrador'}
-        </Button>
-        <Button
-          onClick={() => saveCourse(true)}
-          disabled={saving}
-          className="flex items-center gap-2"
-        >
-          <Eye className="w-4 h-4" />
-          {saving ? 'Publicando...' : 'Publicar Curso'}
-        </Button>
-      </div>
+      {/* Advanced Course Editor */}
+      <AdvancedCourseEditor
+        modules={modules}
+        onModulesChange={setModules}
+        onSave={saveCourse}
+        saving={saving}
+        courseStats={courseStats}
+      />
     </div>
   );
 }
