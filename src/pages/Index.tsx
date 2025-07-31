@@ -58,36 +58,36 @@ export default function Index() {
   ];
 
   return (
-    <div className="home-theme min-h-screen">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white border-b border-neutral-200">
-        <div className="container mx-auto px-4 py-4">
+      <header className="bg-white border-b-4 border-black">
+        <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-brand rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">E</span>
+              <div className="w-10 h-10 bg-black border-2 border-black flex items-center justify-center transform rotate-3">
+                <span className="text-white font-black text-lg">E</span>
               </div>
-              <h1 className="text-2xl font-bold text-neutral-900">EduCommunity</h1>
+              <h1 className="text-3xl font-black text-black uppercase tracking-tight">EduCommunity</h1>
             </div>
             
             <nav className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-neutral-600 hover:text-neutral-900 transition-colors">Características</a>
-              <a href="#testimonials" className="text-neutral-600 hover:text-neutral-900 transition-colors">Testimonios</a>
-              <a href="#pricing" className="text-neutral-600 hover:text-neutral-900 transition-colors">Precios</a>
+              <a href="#features" className="text-black font-bold hover:bg-black hover:text-white px-3 py-2 transition-all transform hover:-translate-y-1">CARACTERÍSTICAS</a>
+              <a href="#testimonials" className="text-black font-bold hover:bg-black hover:text-white px-3 py-2 transition-all transform hover:-translate-y-1">TESTIMONIOS</a>
+              <a href="#pricing" className="text-black font-bold hover:bg-black hover:text-white px-3 py-2 transition-all transform hover:-translate-y-1">PRECIOS</a>
             </nav>
             
             <div className="flex items-center gap-4">
               <Link 
                 to="/auth" 
-                className="text-neutral-600 hover:text-neutral-900 transition-colors"
+                className="text-black font-bold hover:underline decoration-4 underline-offset-4"
               >
-                Iniciar Sesión
+                INICIAR SESIÓN
               </Link>
               <Link 
                 to="/auth" 
-                className="btn-home px-6 py-2 rounded-lg font-medium transition-all duration-200"
+                className="bg-black text-white px-6 py-3 font-black uppercase tracking-wide border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
               >
-                Registrarse
+                REGISTRARSE
               </Link>
             </div>
           </div>
@@ -95,31 +95,44 @@ export default function Index() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-neutral">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-30">
+          <div className="w-full h-full bg-black/5" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }}></div>
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold text-neutral-900 mb-6">
-              Aprende <span className="text-gradient-brand">NoCode</span> e <span className="text-gradient-brand">IA</span>
+            <div className="inline-block bg-black text-white px-6 py-2 font-black uppercase tracking-wider mb-8 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-1">
+              ⚡ PLATAFORMA #1
+            </div>
+            
+            <h1 className="text-6xl md:text-8xl font-black text-black mb-8 leading-none uppercase tracking-tight">
+              APRENDE<br/>
+              <span className="bg-black text-white px-4 inline-block transform -rotate-1 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">NOCODE</span><br/>
+              E <span className="bg-white text-black border-4 border-black px-4 inline-block transform rotate-1 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">IA</span>
             </h1>
-            <p className="text-xl text-neutral-600 mb-8 max-w-3xl mx-auto">
-              Únete a la comunidad más grande de desarrolladores NoCode e IA. 
-              Construye aplicaciones sin código y automatiza procesos con inteligencia artificial.
+            
+            <p className="text-xl font-bold text-black mb-12 max-w-3xl mx-auto uppercase tracking-wide">
+              ÚNETE A LA COMUNIDAD MÁS GRANDE DE DESARROLLADORES NOCODE E IA.<br/>
+              CONSTRUYE APLICACIONES SIN CÓDIGO Y AUTOMATIZA PROCESOS.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Link 
                 to="/auth" 
-                className="btn-home px-8 py-4 rounded-lg text-lg font-semibold inline-flex items-center gap-2 hover:scale-105 transition-all duration-200"
+                className="bg-black text-white px-12 py-6 font-black text-xl uppercase tracking-wide border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all inline-flex items-center gap-3"
               >
-                Comenzar Gratis
-                <ArrowRight className="w-5 h-5" />
+                COMENZAR GRATIS
+                <ArrowRight className="w-6 h-6" />
               </Link>
-              <button className="px-8 py-4 border-2 border-neutral-300 text-neutral-700 rounded-lg text-lg font-semibold hover:bg-neutral-50 transition-all duration-200 inline-flex items-center gap-2">
-                <Play className="w-5 h-5" />
-                Ver Demo
+              <button className="bg-white text-black px-12 py-6 font-black text-xl uppercase tracking-wide border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all inline-flex items-center gap-3">
+                <Play className="w-6 h-6" />
+                VER DEMO
               </button>
             </div>
           </motion.div>
@@ -127,20 +140,27 @@ export default function Index() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+      <section id="features" className="py-24 bg-black text-white relative">
+        <div className="absolute inset-0 bg-white opacity-5" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='m20 20 20 0 0-20-20 0z'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 mb-4">
-              ¿Por qué elegir EduCommunity?
+            <div className="inline-block bg-white text-black px-6 py-2 font-black uppercase tracking-wider mb-8 border-4 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transform -rotate-1">
+              💪 CARACTERÍSTICAS
+            </div>
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-6 uppercase tracking-tight">
+              ¿POR QUÉ ELEGIR<br/>
+              <span className="bg-white text-black px-4 inline-block transform rotate-2 border-4 border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">EDUCOMMUNITY?</span>
             </h2>
-            <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
-              Ofrecemos la mejor experiencia de aprendizaje con tecnología de vanguardia
+            <p className="text-xl font-bold text-white max-w-2xl mx-auto uppercase tracking-wide">
+              OFRECEMOS LA MEJOR EXPERIENCIA DE APRENDIZAJE CON TECNOLOGÍA DE VANGUARDIA
             </p>
           </motion.div>
 
@@ -152,15 +172,15 @@ export default function Index() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="card-home p-6 rounded-xl text-center hover:shadow-lg transition-all duration-300"
+                className="bg-white text-black p-8 border-4 border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] text-center hover:shadow-[12px_12px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all transform hover:rotate-1"
               >
-                <div className="w-16 h-16 bg-gradient-brand rounded-full flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-8 h-8 text-white" />
+                <div className="w-16 h-16 bg-black text-white border-4 border-black flex items-center justify-center mx-auto mb-6 transform rotate-3">
+                  <feature.icon className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-semibold text-neutral-900 mb-2">
+                <h3 className="text-xl font-black text-black mb-4 uppercase tracking-wide">
                   {feature.title}
                 </h3>
-                <p className="text-neutral-600">
+                <p className="text-black font-bold">
                   {feature.description}
                 </p>
               </motion.div>
@@ -170,46 +190,67 @@ export default function Index() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-brand">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-24 bg-white relative">
+        <div className="absolute inset-0 bg-black opacity-5" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Cpath d='M0 0h20v20H0V0zm10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14z'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold text-white mb-4">
-              ¿Listo para transformar tu carrera?
+            <div className="inline-block bg-black text-white px-6 py-2 font-black uppercase tracking-wider mb-8 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-1">
+              🚀 ÚLTIMA OPORTUNIDAD
+            </div>
+            
+            <h2 className="text-5xl md:text-6xl font-black text-black mb-8 uppercase tracking-tight">
+              ¿LISTO PARA<br/>
+              <span className="bg-black text-white px-4 inline-block transform -rotate-1 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">TRANSFORMAR</span><br/>
+              TU CARRERA?
             </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Únete a miles de desarrolladores que ya están construyendo el futuro
+            
+            <p className="text-xl font-bold text-black mb-12 max-w-2xl mx-auto uppercase tracking-wide">
+              ÚNETE A MILES DE DESARROLLADORES QUE YA ESTÁN CONSTRUYENDO EL FUTURO
             </p>
+            
             <Link 
               to="/auth" 
-              className="bg-white text-brand-primary px-8 py-4 rounded-lg text-lg font-semibold inline-flex items-center gap-2 hover:bg-neutral-50 transition-all duration-200"
+              className="bg-black text-white px-16 py-8 font-black text-2xl uppercase tracking-wide border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all inline-flex items-center gap-4 transform hover:rotate-1"
             >
-              Comenzar Ahora
-              <ChevronRight className="w-5 h-5" />
+              COMENZAR AHORA
+              <ChevronRight className="w-8 h-8" />
             </Link>
           </motion.div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 bg-neutral-50">
-        <div className="container mx-auto px-4">
+      <section id="testimonials" className="py-24 bg-black text-white relative">
+        <div className="absolute inset-0 bg-white opacity-5" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpolygon points='15,0 30,30 0,30'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 mb-4">
-              Lo que dicen nuestros estudiantes
+            <div className="inline-block bg-white text-black px-6 py-2 font-black uppercase tracking-wider mb-8 border-4 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transform -rotate-1">
+              ⭐ TESTIMONIOS
+            </div>
+            
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-6 uppercase tracking-tight">
+              LO QUE DICEN<br/>
+              <span className="bg-white text-black px-4 inline-block transform rotate-2 border-4 border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">NUESTROS</span><br/>
+              ESTUDIANTES
             </h2>
-            <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
-              Descubre cómo EduCommunity está transformando carreras
+            
+            <p className="text-xl font-bold text-white max-w-2xl mx-auto uppercase tracking-wide">
+              DESCUBRE CÓMO EDUCOMMUNITY ESTÁ TRANSFORMANDO CARRERAS
             </p>
           </motion.div>
 
@@ -221,20 +262,20 @@ export default function Index() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="card-home p-6 rounded-xl"
+                className="bg-white text-black p-8 border-4 border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:shadow-[12px_12px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all transform hover:rotate-1"
               >
-                <div className="flex items-center gap-4 mb-4">
+                <div className="flex items-center gap-4 mb-6">
                   <img 
                     src={testimonial.avatar} 
                     alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
+                    className="w-16 h-16 object-cover border-4 border-black transform rotate-3"
                   />
                   <div>
-                    <h4 className="font-semibold text-neutral-900">{testimonial.name}</h4>
-                    <p className="text-sm text-neutral-600">{testimonial.role}</p>
+                    <h4 className="font-black text-black uppercase tracking-wide">{testimonial.name}</h4>
+                    <p className="text-sm font-bold text-black">{testimonial.role}</p>
                   </div>
                 </div>
-                <p className="text-neutral-700">
+                <p className="text-black font-bold text-lg">
                   "{testimonial.content}"
                 </p>
               </motion.div>
@@ -244,51 +285,51 @@ export default function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-neutral-900 text-white py-12">
+      <footer className="bg-white border-t-4 border-black py-16">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-12">
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 bg-gradient-brand rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">E</span>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-black border-4 border-black flex items-center justify-center transform rotate-3">
+                  <span className="text-white font-black text-xl">E</span>
                 </div>
-                <h3 className="text-xl font-bold">EduCommunity</h3>
+                <h3 className="text-2xl font-black text-black uppercase tracking-tight">EduCommunity</h3>
               </div>
-              <p className="text-neutral-400">
-                La plataforma líder en aprendizaje de NoCode e IA
+              <p className="text-black font-bold uppercase tracking-wide">
+                LA PLATAFORMA LÍDER EN APRENDIZAJE DE NOCODE E IA
               </p>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Producto</h4>
-              <ul className="space-y-2 text-neutral-400">
-                <li><a href="#" className="hover:text-white transition-colors">Cursos</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Comunidad</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Certificaciones</a></li>
+              <h4 className="font-black text-black mb-6 uppercase tracking-wide text-lg">PRODUCTO</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-black font-bold hover:bg-black hover:text-white px-2 py-1 transition-all transform hover:-translate-y-1">CURSOS</a></li>
+                <li><a href="#" className="text-black font-bold hover:bg-black hover:text-white px-2 py-1 transition-all transform hover:-translate-y-1">COMUNIDAD</a></li>
+                <li><a href="#" className="text-black font-bold hover:bg-black hover:text-white px-2 py-1 transition-all transform hover:-translate-y-1">CERTIFICACIONES</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Recursos</h4>
-              <ul className="space-y-2 text-neutral-400">
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Documentación</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Soporte</a></li>
+              <h4 className="font-black text-black mb-6 uppercase tracking-wide text-lg">RECURSOS</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-black font-bold hover:bg-black hover:text-white px-2 py-1 transition-all transform hover:-translate-y-1">BLOG</a></li>
+                <li><a href="#" className="text-black font-bold hover:bg-black hover:text-white px-2 py-1 transition-all transform hover:-translate-y-1">DOCUMENTACIÓN</a></li>
+                <li><a href="#" className="text-black font-bold hover:bg-black hover:text-white px-2 py-1 transition-all transform hover:-translate-y-1">SOPORTE</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Empresa</h4>
-              <ul className="space-y-2 text-neutral-400">
-                <li><a href="#" className="hover:text-white transition-colors">Acerca de</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contacto</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacidad</a></li>
+              <h4 className="font-black text-black mb-6 uppercase tracking-wide text-lg">EMPRESA</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-black font-bold hover:bg-black hover:text-white px-2 py-1 transition-all transform hover:-translate-y-1">ACERCA DE</a></li>
+                <li><a href="#" className="text-black font-bold hover:bg-black hover:text-white px-2 py-1 transition-all transform hover:-translate-y-1">CONTACTO</a></li>
+                <li><a href="#" className="text-black font-bold hover:bg-black hover:text-white px-2 py-1 transition-all transform hover:-translate-y-1">PRIVACIDAD</a></li>
               </ul>
             </div>
           </div>
           
-          <div className="border-t border-neutral-800 mt-8 pt-8 text-center text-neutral-400">
-            <p>&copy; 2024 EduCommunity. Todos los derechos reservados.</p>
+          <div className="border-t-4 border-black mt-12 pt-8 text-center">
+            <p className="text-black font-black uppercase tracking-wider">&copy; 2024 EDUCOMMUNITY. TODOS LOS DERECHOS RESERVADOS.</p>
           </div>
         </div>
       </footer>
