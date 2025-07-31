@@ -1,0 +1,97 @@
+name: 🔄 Auto Sync - Cursor.ai ↔ Lovable
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+      - 'SYNC_GUIDE.md'
+      - '.github/**'
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  sync-check:
+    runs-on: ubuntu-latest
+    name: 🔍 Verificar Sincronización
+    
+    steps:
+      - name: 📥 Checkout código
+        uses: actions/checkout@v4
+        
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: 📦 Instalar dependencias
+        run: npm ci
+        
+      - name: 🔍 Verificar sintaxis
+        run: npm run lint
+        
+      - name: 🏗️ Verificar build
+        run: npm run build
+        
+      - name: ✅ Verificar archivos de sincronización
+        run: |
+          echo "🔍 Verificando archivos de sincronización..."
+          
+          # Verificar que existen los scripts
+          if [ ! -f "scripts/sync.sh" ]; then
+            echo "❌ Error: scripts/sync.sh no encontrado"
+            exit 1
+          fi
+          
+          if [ ! -f "scripts/sync.ps1" ]; then
+            echo "❌ Error: scripts/sync.ps1 no encontrado"
+            exit 1
+          fi
+          
+          if [ ! -f "lovable.config.json" ]; then
+            echo "❌ Error: lovable.config.json no encontrado"
+            exit 1
+          fi
+          
+          if [ ! -f "SYNC_GUIDE.md" ]; then
+            echo "❌ Error: SYNC_GUIDE.md no encontrado"
+            exit 1
+          fi
+          
+          echo "✅ Todos los archivos de sincronización están presentes"
+          
+      - name: 📊 Mostrar información del commit
+        run: |
+          echo "📝 Commit Info:"
+          echo "Author: ${{ github.actor }}"
+          echo "Message: ${{ github.event.head_commit.message }}"
+          echo "Files changed:"
+          git diff --name-only ${{ github.event.before }} ${{ github.event.after }} || echo "No files changed"
+          
+  notify-lovable:
+    runs-on: ubuntu-latest
+    name: 📢 Notificar a Lovable
+    needs: sync-check
+    if: github.event_name == 'push'
+    
+    steps:
+      - name: 📥 Checkout código
+        uses: actions/checkout@v4
+        
+      - name: 📢 Notificar cambios
+        run: |
+          echo "🚀 Cambios sincronizados exitosamente"
+          echo "📅 Timestamp: $(date)"
+          echo "👤 Autor: ${{ github.actor }}"
+          echo "📝 Mensaje: ${{ github.event.head_commit.message }}"
+          echo "🔗 Commit: ${{ github.event.head_commit.url }}"
+          echo ""
+          echo "Lovable detectará estos cambios automáticamente"
+          echo "y hará deploy de la nueva versión."
+          
+      - name: 📊 Resumen de cambios
+        run: |
+          echo "📊 Resumen de cambios:"
+          echo "======================"
+          git diff --stat ${{ github.event.before }} ${{ github.event.after }} || echo "No hay cambios para mostrar" 

@@ -1,29 +1,64 @@
-import js from "@eslint/js";
-import globals from "globals";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
-import tseslint from "typescript-eslint";
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ["**/*.{ts,tsx}"],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.es2020,
+      },
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
     },
     plugins: {
-      "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": [
-        "warn",
+      'react-refresh/only-export-components': [
+        'warn',
         { allowConstantExport: true },
       ],
-      "@typescript-eslint/no-unused-vars": "off",
+      // Reglas específicas para sincronización
+      'no-console': 'warn',
+      'no-debugger': 'error',
+      'prefer-const': 'error',
+      'no-var': 'error',
+      'no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/prefer-const': 'error',
+      // Reglas para imports
+      'import/order': 'off', // Desactivado por conflictos
+      'sort-imports': 'off', // Desactivado por conflictos
     },
+  },
+  {
+    files: ['scripts/**/*.js', 'scripts/**/*.ts'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+  {
+    ignores: [
+      'dist',
+      'node_modules',
+      '.vite',
+      '*.config.js',
+      '*.config.ts',
+    ],
   }
 );

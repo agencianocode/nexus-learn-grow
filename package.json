@@ -8,7 +8,12 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync:push": "powershell -ExecutionPolicy Bypass -File scripts/sync.ps1 push",
+    "sync:pull": "powershell -ExecutionPolicy Bypass -File scripts/sync.ps1 pull",
+    "sync:status": "powershell -ExecutionPolicy Bypass -File scripts/sync.ps1 status",
+    "sync:setup": "powershell -ExecutionPolicy Bypass -File scripts/sync.ps1 setup",
+    "sync:help": "powershell -ExecutionPolicy Bypass -File scripts/sync.ps1 help"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
