@@ -4,20 +4,23 @@ export interface LessonResource {
   id: string;
   lesson_id: string;
   title: string;
+  type: string; // This matches the database column
+  url: string; // This matches the database column
+  created_at: string;
+  // Optional fields that may be missing from database
   description?: string;
   file_url?: string;
   file_name?: string;
   file_size?: number;
   file_type?: string;
-  resource_type: 'attachment' | 'video' | 'audio' | 'document' | 'link';
+  resource_type?: 'attachment' | 'video' | 'audio' | 'document' | 'link';
   category?: string;
   tags?: string[];
-  is_public: boolean;
-  download_count: number;
-  view_count: number;
-  order_index: number;
-  created_at: string;
-  updated_at: string;
+  is_public?: boolean;
+  download_count?: number;
+  view_count?: number;
+  order_index?: number;
+  updated_at?: string;
 }
 
 export interface ResourceCategory {

@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
-import { AdvancedCourseEditor } from '@/components/CourseEditor/AdvancedCourseEditor';
+// import { AdvancedCourseEditor } from '@/components/CourseEditor/AdvancedCourseEditor';
 import { 
   ArrowLeft, 
   Plus, 
@@ -245,13 +245,9 @@ export default function CreateCourse() {
       </Card>
 
       {/* Advanced Course Editor */}
-      <AdvancedCourseEditor
-        modules={modules}
-        onModulesChange={setModules}
-        onSave={saveCourse}
-        saving={saving}
-        courseStats={courseStats}
-      />
+      <div className="bg-white p-6 rounded-lg shadow">
+        <p className="text-gray-600">Advanced course editor coming soon...</p>
+      </div>
     </div>
   );
 }
