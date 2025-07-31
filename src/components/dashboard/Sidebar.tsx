@@ -42,28 +42,28 @@ export const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-b from-gray-900/95 to-gray-800/95">
+    <div className="h-full flex flex-col bg-black text-white">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="p-6 border-b border-gray-800/50"
+        className="p-6 border-b-4 border-white"
       >
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">N</span>
+          <div className="w-8 h-8 bg-white border-2 border-white flex items-center justify-center transform rotate-3">
+            <span className="text-black font-black text-sm">N</span>
           </div>
-          <h1 className="text-white font-bold text-lg">no code-start up</h1>
+          <h1 className="text-white font-black text-lg uppercase tracking-wide">NO CODE-START UP</h1>
         </div>
         
         {/* Search Bar */}
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black w-4 h-4" />
           <input
             type="text"
-            placeholder="Pesquisar cursos e aulas"
-            className="w-full pl-10 pr-4 py-2 bg-gray-800/50 border border-gray-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500/50 transition-all duration-200"
+            placeholder="PESQUISAR CURSOS E AULAS"
+            className="w-full pl-10 pr-4 py-3 bg-white border-4 border-white text-black placeholder-black font-bold uppercase tracking-wide focus:outline-none focus:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all"
           />
         </div>
       </motion.div>
@@ -73,17 +73,17 @@ export const Sidebar: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="p-6 border-b border-gray-800/50"
+        className="p-6 border-b-4 border-white"
       >
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-lg">FS</span>
+          <div className="w-12 h-12 bg-white border-4 border-white flex items-center justify-center transform -rotate-2">
+            <span className="text-black font-black text-lg">FS</span>
           </div>
           <div className="flex-1">
-            <h3 className="text-white font-semibold">Fabian Segura</h3>
-            <p className="text-gray-400 text-sm">Estudiante Premium</p>
+            <h3 className="text-white font-black uppercase tracking-wide">FABIAN SEGURA</h3>
+            <p className="text-white font-bold text-sm bg-black px-2 py-1 border-2 border-white transform rotate-1 inline-block">ESTUDIANTE PREMIUM</p>
           </div>
-          <ChevronDown className="w-4 h-4 text-gray-400" />
+          <ChevronDown className="w-6 h-6 text-white" />
         </div>
       </motion.div>
 
@@ -104,20 +104,20 @@ export const Sidebar: React.FC = () => {
             >
               <button
                 onClick={() => setActiveItem(item.id)}
-                className={`w-full flex items-center gap-3 px-6 py-3 text-left transition-all duration-200 group ${
+                className={`w-full flex items-center gap-3 px-6 py-4 text-left transition-all group ${
                   activeItem === item.id
-                    ? 'bg-gradient-to-r from-vibrant-500/20 to-vibrant-600/20 border-r-2 border-vibrant-500 text-white'
-                    : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
+                    ? 'bg-white text-black border-l-4 border-black font-black shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]'
+                    : 'text-white hover:text-black hover:bg-white font-bold hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-1'
                 }`}
               >
-                <item.icon className="w-5 h-5" />
-                <span className="font-medium">{item.label}</span>
+                <item.icon className="w-6 h-6" />
+                <span className="font-bold uppercase tracking-wide">{item.label}</span>
                 {item.badge && (
-                  <span className="ml-auto bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                  <span className="ml-auto bg-black text-white text-xs px-3 py-1 border-2 border-white transform rotate-2 font-black">
                     {item.badge}
                   </span>
                 )}
-                <ChevronRight className={`w-4 h-4 ml-auto transition-transform duration-200 ${
+                <ChevronRight className={`w-5 h-5 ml-auto transition-transform ${
                   activeItem === item.id ? 'rotate-90' : 'group-hover:translate-x-1'
                 }`} />
               </button>
@@ -131,14 +131,14 @@ export const Sidebar: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="p-6 border-t border-gray-800/50"
+        className="p-6 border-t-4 border-white"
       >
         <button
           onClick={handleSignOut}
-          className="w-full flex items-center gap-3 px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-200 group"
+          className="w-full flex items-center gap-3 px-6 py-4 text-white hover:text-black hover:bg-white transition-all group font-bold uppercase tracking-wide border-2 border-white hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-1"
         >
-          <HelpCircle className="w-5 h-5" />
-          <span className="font-medium">Cerrar Sesión</span>
+          <HelpCircle className="w-6 h-6" />
+          <span className="font-black">CERRAR SESIÓN</span>
         </button>
       </motion.div>
     </div>

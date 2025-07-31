@@ -28,10 +28,10 @@ export default function Dashboard() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center">
-        <div className="text-white text-center">
-          <h1 className="text-2xl font-bold mb-4">Acceso Denegado</h1>
-          <p>Debes iniciar sesión para acceder al dashboard.</p>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-black text-center">
+          <h1 className="text-3xl font-black mb-4 uppercase tracking-wide">ACCESO DENEGADO</h1>
+          <p className="font-bold">DEBES INICIAR SESIÓN PARA ACCEDER AL DASHBOARD.</p>
         </div>
       </div>
     );
@@ -41,9 +41,11 @@ export default function Dashboard() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-64">
-          <div className="text-white text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4"></div>
-            <p>Cargando dashboard...</p>
+          <div className="text-black text-center">
+            <div className="w-16 h-16 border-4 border-black mx-auto mb-4 animate-spin" style={{
+              borderLeftColor: 'transparent'
+            }}></div>
+            <p className="font-black uppercase tracking-wide">CARGANDO DASHBOARD...</p>
           </div>
         </div>
       </DashboardLayout>
@@ -53,9 +55,9 @@ export default function Dashboard() {
   if (error) {
     return (
       <DashboardLayout>
-        <div className="text-center text-red-400">
-          <h2 className="text-xl font-bold mb-2">Error</h2>
-          <p>{error}</p>
+        <div className="text-center bg-white p-8 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <h2 className="text-2xl font-black mb-4 uppercase tracking-wide">ERROR</h2>
+          <p className="font-bold">{error}</p>
         </div>
       </DashboardLayout>
     );
@@ -64,60 +66,62 @@ export default function Dashboard() {
   if (!data) {
     return (
       <DashboardLayout>
-        <div className="text-center text-gray-400">
-          <h2 className="text-xl font-bold mb-2">No hay datos</h2>
-          <p>No se encontraron datos para mostrar.</p>
+        <div className="text-center bg-white p-8 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <h2 className="text-2xl font-black mb-4 uppercase tracking-wide">NO HAY DATOS</h2>
+          <p className="font-bold">NO SE ENCONTRARON DATOS PARA MOSTRAR.</p>
         </div>
       </DashboardLayout>
     );
   }
 
   return (
-    <div className="dashboard-theme min-h-screen">
+    <div className="bg-white min-h-screen">
       <DashboardLayout>
       {/* Hero Banner */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative h-80 mb-8 rounded-xl overflow-hidden bg-gradient-to-r from-gray-900 via-gray-800 to-black"
+        className="relative h-80 mb-8 overflow-hidden bg-black border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-teal-500/10" />
+        <div className="absolute inset-0 bg-white opacity-5" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='m20 20 20 0 0-20-20 0z'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
         
         {/* Left side - Logo and Text */}
         <div className="absolute left-8 top-1/2 transform -translate-y-1/2">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center">
-              <Brain className="w-8 h-8 text-white" />
+            <div className="w-16 h-16 bg-white border-4 border-white flex items-center justify-center transform rotate-3">
+              <Brain className="w-8 h-8 text-black" />
             </div>
             <div>
-              <h2 className="text-green-400 text-sm font-medium">FORMAÇÃO NOCODE</h2>
-              <h1 className="text-4xl font-bold text-white">SaaSIA</h1>
+              <h2 className="text-white text-sm font-black uppercase tracking-wide mb-2 bg-black px-3 py-1 border-2 border-white transform -rotate-1">FORMAÇÃO NOCODE</h2>
+              <h1 className="text-5xl font-black text-white uppercase tracking-tight">SAASIA</h1>
             </div>
           </div>
         </div>
 
         {/* Right side - Lightbulb with brain */}
         <div className="absolute right-8 top-1/2 transform -translate-y-1/2">
-          <div className="relative">
-            <Lightbulb className="w-24 h-24 text-yellow-400" />
+          <div className="relative bg-white p-4 border-4 border-white transform rotate-2">
+            <Lightbulb className="w-20 h-20 text-black" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <Brain className="w-12 h-12 text-purple-400" />
+              <Brain className="w-10 h-10 text-black" />
             </div>
             {/* Floating icons around lightbulb */}
-            <div className="absolute -top-2 -right-2 w-6 h-6 bg-purple-500 rounded-lg flex items-center justify-center">
-              <Zap className="w-3 h-3 text-white" />
+            <div className="absolute -top-2 -right-2 w-8 h-8 bg-black border-2 border-white flex items-center justify-center transform rotate-12">
+              <Zap className="w-4 h-4 text-white" />
             </div>
-            <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-green-500 rounded-lg flex items-center justify-center">
-              <Brain className="w-3 h-3 text-white" />
+            <div className="absolute -bottom-2 -left-2 w-8 h-8 bg-black border-2 border-white flex items-center justify-center transform -rotate-12">
+              <Brain className="w-4 h-4 text-white" />
             </div>
           </div>
         </div>
 
         {/* ChatGPT logo */}
         <div className="absolute top-4 right-4">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-1">
-            <span className="text-white text-sm font-medium">ChatGPT</span>
+          <div className="bg-white border-4 border-white px-4 py-2 transform -rotate-2">
+            <span className="text-black text-sm font-black uppercase tracking-wide">CHATGPT</span>
           </div>
         </div>
       </motion.div>
@@ -333,21 +337,25 @@ export default function Dashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="relative h-64 mt-8 rounded-xl overflow-hidden bg-gradient-to-r from-gray-900 via-gray-800 to-black"
+        className="relative h-64 mt-8 overflow-hidden bg-black border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-500/10" />
+        <div className="absolute inset-0 bg-white opacity-5" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpolygon points='15,0 30,30 0,30'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
         
         {/* Center content */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
-            <h2 className="text-orange-400 text-2xl font-bold mb-2">FORMAÇÃO GESTOR</h2>
-            <h1 className="text-5xl font-bold text-white">AgentesIA</h1>
+            <div className="inline-block bg-white text-black px-6 py-2 font-black uppercase tracking-wider mb-4 border-4 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transform rotate-1">
+              🎯 FORMAÇÃO GESTOR
+            </div>
+            <h1 className="text-6xl font-black text-white uppercase tracking-tight">AGENTESIA</h1>
           </div>
         </div>
 
         {/* Bottom text */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-          <p className="text-gray-400 text-sm">Desenvolvido por No-Code Start-Up</p>
+          <p className="text-white font-black uppercase tracking-wide text-sm bg-black px-4 py-2 border-2 border-white transform -rotate-1">DESENVOLVIDO POR NO-CODE START-UP</p>
         </div>
       </motion.div>
 
@@ -358,8 +366,8 @@ export default function Dashboard() {
         transition={{ duration: 0.5, delay: 0.5 }}
         className="fixed bottom-8 right-8 z-50"
       >
-        <button className="w-14 h-14 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110">
-          <MessageCircle className="w-6 h-6 text-white" />
+        <button className="w-16 h-16 bg-black border-4 border-black text-white flex items-center justify-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all transform rotate-3 hover:rotate-6">
+          <MessageCircle className="w-8 h-8" />
         </button>
       </motion.div>
     </DashboardLayout>

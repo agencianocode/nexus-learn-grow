@@ -55,12 +55,12 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
       className="mb-8"
     >
       {/* Section Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-8">
         <motion.h2
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-2xl font-bold text-white"
+          className="text-3xl font-black text-black uppercase tracking-tight border-4 border-black bg-white px-6 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform -rotate-1"
         >
           {title}
         </motion.h2>
@@ -77,24 +77,24 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
               <button
                 onClick={() => scroll('left')}
                 disabled={!canScrollLeft}
-                className={`p-2 rounded-lg transition-all duration-200 ${
+                className={`p-3 border-4 border-black transition-all ${
                   canScrollLeft
-                    ? 'bg-gray-800/50 text-white hover:bg-gray-700/50'
-                    : 'bg-gray-800/20 text-gray-500 cursor-not-allowed'
+                    ? 'bg-white text-black hover:bg-black hover:text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px]'
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 }`}
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={() => scroll('right')}
                 disabled={!canScrollRight}
-                className={`p-2 rounded-lg transition-all duration-200 ${
+                className={`p-3 border-4 border-black transition-all ${
                   canScrollRight
-                    ? 'bg-gray-800/50 text-white hover:bg-gray-700/50'
-                    : 'bg-gray-800/20 text-gray-500 cursor-not-allowed'
+                    ? 'bg-white text-black hover:bg-black hover:text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px]'
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 }`}
               >
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-5 h-5" />
               </button>
             </div>
 
@@ -102,9 +102,9 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
             {onSettingsClick && (
               <button
                 onClick={onSettingsClick}
-                className="p-2 rounded-lg bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 transition-all duration-200"
+                className="p-3 border-4 border-black bg-white text-black hover:bg-black hover:text-white transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px]"
               >
-                <Settings className="w-4 h-4" />
+                <Settings className="w-5 h-5" />
               </button>
             )}
           </motion.div>
@@ -115,7 +115,7 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
       <div className="relative">
         <div
           ref={scrollContainerRef}
-          className="flex gap-6 overflow-x-auto scrollbar-hide pb-4"
+          className="flex gap-8 overflow-x-auto pb-4"
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none'
@@ -125,8 +125,8 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
         </div>
 
         {/* Gradient Overlays for Scroll Indication */}
-        <div className="absolute left-0 top-0 bottom-4 w-8 bg-gradient-to-r from-gray-900 to-transparent pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-gray-900 to-transparent pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-4 w-8 bg-gradient-to-r from-white to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-white to-transparent pointer-events-none" />
       </div>
     </motion.div>
   );
